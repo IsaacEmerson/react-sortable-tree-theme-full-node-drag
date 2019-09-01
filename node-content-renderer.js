@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styles from './node-content-renderer.scss';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import styles from "./node-content-renderer.scss";
 
 function isDescendant(older, younger) {
   return (
     !!older.children &&
-    typeof older.children !== 'function' &&
+    typeof older.children !== "function" &&
     older.children.some(
       child => child === younger || isDescendant(child, younger)
     )
@@ -56,46 +56,47 @@ class CustomThemeNodeContentRenderer extends Component {
       <div
         className={
           styles.row +
-          (isLandingPadActive ? ` ${styles.rowLandingPad}` : '') +
-          (isLandingPadActive && !canDrop ? ` ${styles.rowCancelPad}` : '') +
-          (isSearchMatch ? ` ${styles.rowSearchMatch}` : '') +
-          (isSearchFocus ? ` ${styles.rowSearchFocus}` : '') +
-          (className ? ` ${className}` : '')
+          (isLandingPadActive ? ` ${styles.rowLandingPad}` : "") +
+          (isLandingPadActive && !canDrop ? ` ${styles.rowCancelPad}` : "") +
+          (isSearchMatch ? ` ${styles.rowSearchMatch}` : "") +
+          (isSearchFocus ? ` ${styles.rowSearchFocus}` : "") +
+          (className ? ` ${className}` : "")
         }
         style={{
           opacity: isDraggedDescendant ? 0.5 : 1,
-          ...style,
+          ...style
         }}
       >
         <div
           className={
             styles.rowContents +
-            (!canDrag ? ` ${styles.rowContentsDragDisabled}` : '')
+            (!canDrag ? ` ${styles.rowContentsDragDisabled}` : "")
           }
         >
+          <div className={styles.moveHandle} draggable="true" />
           <div className={styles.rowLabel}>
             <span
               className={
                 styles.rowTitle +
-                (node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : '')
+                (node.subtitle ? ` ${styles.rowTitleWithSubtitle}` : "")
               }
             >
-              {typeof nodeTitle === 'function'
+              {typeof nodeTitle === "function"
                 ? nodeTitle({
                     node,
                     path,
-                    treeIndex,
+                    treeIndex
                   })
                 : nodeTitle}
             </span>
 
             {nodeSubtitle && (
               <span className={styles.rowSubtitle}>
-                {typeof nodeSubtitle === 'function'
+                {typeof nodeSubtitle === "function"
                   ? nodeSubtitle({
                       node,
                       path,
-                      treeIndex,
+                      treeIndex
                     })
                   : nodeSubtitle}
               </span>
@@ -117,14 +118,14 @@ class CustomThemeNodeContentRenderer extends Component {
     );
 
     return (
-      <div style={{ height: '100%' }} {...otherProps}>
+      <div style={{ height: "100%" }} {...otherProps}>
         {toggleChildrenVisibility &&
           node.children &&
-          (node.children.length > 0 || typeof node.children === 'function') && (
+          (node.children.length > 0 || typeof node.children === "function") && (
             <div>
               <button
                 type="button"
-                aria-label={node.expanded ? 'Collapse' : 'Expand'}
+                aria-label={node.expanded ? "Collapse" : "Expand"}
                 className={
                   node.expanded ? styles.collapseButton : styles.expandButton
                 }
@@ -133,29 +134,28 @@ class CustomThemeNodeContentRenderer extends Component {
                   toggleChildrenVisibility({
                     node,
                     path,
-                    treeIndex,
+                    treeIndex
                   })
                 }
               />
 
-              {node.expanded &&
-                !isDragging && (
-                  <div
-                    style={{ width: scaffoldBlockPxWidth }}
-                    className={styles.lineChildren}
-                  />
-                )}
+              {node.expanded && !isDragging && (
+                <div
+                  style={{ width: scaffoldBlockPxWidth }}
+                  className={styles.lineChildren}
+                />
+              )}
             </div>
           )}
 
         <div
           className={
             styles.rowWrapper +
-            (!canDrag ? ` ${styles.rowWrapperDragDisabled}` : '')
+            (!canDrag ? ` ${styles.rowWrapperDragDisabled}` : "")
           }
         >
           {canDrag
-            ? connectDragSource(nodeContent, { dropEffect: 'copy' })
+            ? connectDragSource(nodeContent, { dropEffect: "copy" })
             : nodeContent}
         </div>
       </div>
@@ -167,7 +167,7 @@ CustomThemeNodeContentRenderer.defaultProps = {
   buttons: [],
   canDrag: false,
   canDrop: false,
-  className: '',
+  className: "",
   draggedNode: null,
   icons: [],
   isSearchFocus: false,
@@ -179,7 +179,7 @@ CustomThemeNodeContentRenderer.defaultProps = {
   swapFrom: null,
   swapLength: null,
   title: null,
-  toggleChildrenVisibility: null,
+  toggleChildrenVisibility: null
 };
 
 CustomThemeNodeContentRenderer.propTypes = {
@@ -216,7 +216,7 @@ CustomThemeNodeContentRenderer.propTypes = {
   parentNode: PropTypes.shape({}), // Needed for dndManager
   // Drop target
   canDrop: PropTypes.bool,
-  isOver: PropTypes.bool.isRequired,
+  isOver: PropTypes.bool.isRequired
 };
 
 export default CustomThemeNodeContentRenderer;
