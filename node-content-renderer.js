@@ -73,7 +73,7 @@ class CustomThemeNodeContentRenderer extends Component {
             (!canDrag ? ` ${styles.rowContentsDragDisabled}` : "")
           }
         >
-          <div className={styles.moveHandle} draggable="true" />
+          {/* <div className={styles.moveHandle} draggable="true" /> */}
           <div className={styles.rowLabel}>
             <span
               className={
